@@ -1,0 +1,23 @@
+{
+	"name"         : "scrollFocus",
+	"title"        : "jQuery.scrollFocus",
+	"description"  : "Powerful programmable scrolling - scroll elements, DOM ranges or arbitrary points into configurable viewports",
+	"keywords"     : [
+		"scroll",
+		"range",
+		"viewport"
+	],
+	"version"      : "0.0.1",
+	"author"       : {
+		"name"     : "Stef Busking"
+	},
+	"licences"     : [
+		{
+			"type" : "MIT",
+			"url"  : "http://opensource.org/licenses/MIT"
+		}
+	],
+	"dependencies" : {
+		"jquery"   : "1.9.x"
+	}
+}
