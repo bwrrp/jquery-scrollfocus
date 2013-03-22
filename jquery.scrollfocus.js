@@ -129,22 +129,64 @@
 		return new Box(bounds, null).relativeTo(new ScrollBox(container));
 	}
 
-	function scrollerize(target, box, until) {
-		if (box) {
-			if (box.scrollTo) {
-				var relativeTarget = target.relativeTo(box);
-				box.scrollTo(relativeTarget.left, relativeTarget.top);
+	function getParents(box) {
+		var parents = [];
+		while (box) {
+			parents.unshift(box);
+			box = box.parentBox;
+		}
+		return parents;
+	}
 
-				if (box.element && (box.element === until || $.contains(box.element, until)))
+	function getCommonAncestorBox(box1, box2) {
+		var parents1 = getParents(box1),
+			parents2 = getParents(box2),
+			commonAncestor = null;
+		while (parents1.length && parents2.length && parents1[0] === parents2[0]) {
+			commonAncestor = parents1.shift();
+			parents2.shift();
+		}
+		return commonAncestor;
+	}
+
+	function scrollInto(targetBox, viewportBox, options) {
+		var currentBox = targetBox,
+			commonAncestorBox = getCommonAncestorBox(targetBox, viewportBox);
+
+		// Only scrolling below the common ancestor will bring the target closer to the viewport
+		while (currentBox !== commonAncestorBox) {
+			// Is this box scrollable?
+			if (currentBox.scrollTo) {
+				// TODO: determine how to scroll to get target into viewport or into the parentBox
+				var relativeTarget = target.relativeTo(currentBox);
+				currentBox.scrollTo(relativeTarget.left, relativeTarget.top);
+			}
+
+			currentBox = currentBox.parentBox;
+		}
+	}
+
+	function scrollerize(target, box, untilElement) {
+		if (box.parentBox) {
+			if (box.parentBox.scrollTo) {
+				// Move target into the viewport defined by box
+				var relativeTarget = target.relativeTo(box.parentBox);
+				box.parentBox.scrollTo(relativeTarget.left, relativeTarget.top);
+
+				if (box.parentBox.element && (box.parentBox.element === untilElement || $.contains(box.parentBox.element, untilElement)))
 					return;
 			}
-			scrollerize(target, box.parentBox, until);
+			scrollerize(target, box.parentBox, untilElement);
 		}
+	}
+
+	function isRange(obj) {
+		return !!obj.startContainer;
 	}
 
 	$.fn.scrollFocus = function(target) {
 		$(this).each(function() {
-			var box = target.startContainer ? getRangeBox(target) : new OffsetBox(target);
+			var box = isRange(target) ? getRangeBox(target) : new OffsetBox(target);
 			console.log(box.toString());
 			scrollerize(box, box, this);
 		});
