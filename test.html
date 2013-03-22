@@ -3,6 +3,9 @@
 	<head>
 		<title>jQuery.scrollFocus test page</title>
 		<style>
+			html {
+				overflow: scroll;
+			}
 			body {
 				background-color:#269;
 				background-image: linear-gradient(white 2px, transparent 2px),
@@ -81,16 +84,16 @@
 		<div id="a">
 			<div id="b">
 				<div id="c">
-					<div class="d">Meep 1</div>
-					<div class="d">Meep 2</div>
-					<div class="d">Meep 3</div>
-					<div class="d">Meep 4</div>
-					<div class="d">Meep 5</div>
-					<div class="d">Meep 6</div>
-					<div class="d">Meep 7</div>
-					<div class="d">Meep 8</div>
-					<div class="d">Meep 9</div>
-					<div class="d">Meep 10</div>
+					<div class="d"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ea voluptates facilis rem quaerat praesentium repellat a debitis magnam sed vel obcaecati pariatur dolor rerum voluptatibus. Natus similique impedit delectus! 1</span></div>
+					<div class="d"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ea voluptates facilis rem quaerat praesentium repellat a debitis magnam sed vel obcaecati pariatur dolor rerum voluptatibus. Natus similique impedit delectus! 2</span></div>
+					<div class="d"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ea voluptates facilis rem quaerat praesentium repellat a debitis magnam sed vel obcaecati pariatur dolor rerum voluptatibus. Natus similique impedit delectus! 3</span></div>
+					<div class="d"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ea voluptates facilis rem quaerat praesentium repellat a debitis magnam sed vel obcaecati pariatur dolor rerum voluptatibus. Natus similique impedit delectus! 4</span></div>
+					<div class="d"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ea voluptates facilis rem quaerat praesentium repellat a debitis magnam sed vel obcaecati pariatur dolor rerum voluptatibus. Natus similique impedit delectus! 5</span></div>
+					<div class="d"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ea voluptates facilis rem quaerat praesentium repellat a debitis magnam sed vel obcaecati pariatur dolor rerum voluptatibus. Natus similique impedit delectus! 6</span></div>
+					<div class="d"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ea voluptates facilis rem quaerat praesentium repellat a debitis magnam sed vel obcaecati pariatur dolor rerum voluptatibus. Natus similique impedit delectus! 7</span></div>
+					<div class="d"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ea voluptates facilis rem quaerat praesentium repellat a debitis magnam sed vel obcaecati pariatur dolor rerum voluptatibus. Natus similique impedit delectus! 8</span></div>
+					<div class="d"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ea voluptates facilis rem quaerat praesentium repellat a debitis magnam sed vel obcaecati pariatur dolor rerum voluptatibus. Natus similique impedit delectus! 9</span></div>
+					<div class="d"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ea voluptates facilis rem quaerat praesentium repellat a debitis magnam sed vel obcaecati pariatur dolor rerum voluptatibus. Natus similique impedit delectus! 10</span></div>
 				</div>
 			</div>
 		</div>
@@ -98,7 +101,7 @@
 		<script src="jquery.scrollfocus.js"></script>
 		<script>
 			$(document).on('click', '*', function() {
-				$(this).closest('div, body').scrollFocus(this);
+				$(window).scrollFocus(this);
 				return false;
 			});
 			$(document).on('keyup', function() {
