@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+	<head>
+		<title>jQuery.scrollFocus test page</title>
+		<style>
+			html {
+				overflow: scroll;
+			}
+			body {
+				margin: 0;
+				background-color:#269;
+				background-image: linear-gradient(white 2px, transparent 2px),
+				linear-gradient(90deg, white 2px, transparent 2px),
+				linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+				background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+				background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
+			}
+			div {
+				outline: 1px solid #000;
+			}
+			#viewport {
+				margin-top: 300px;
+				padding: 20px;
+			}
+			#overlay {
+				background: #fff;
+				position: fixed;
+				top: 0;
+				right: 0;
+				left: 0;
+				height: 300px;
+			}
+			.doc {
+				margin: 20px;
+				padding: 20px;
+				height: 180px;
+				background: #fff;
+			}
+		</style>
+	</head>
+	
+	<body class="grid-overlay">
+		<div id="viewport" contentEditable="true">
+			<div class="doc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat officiis deleniti dolor soluta veniam voluptatem quis commodi eveniet earum porro! Molestiae optio sapiente explicabo! Ducimus saepe perspiciatis vitae sequi consequuntur.</div>
+			<div class="doc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat officiis deleniti dolor soluta veniam voluptatem quis commodi eveniet earum porro! Molestiae optio sapiente explicabo! Ducimus saepe perspiciatis vitae sequi consequuntur.</div>
+			<div class="doc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat officiis deleniti dolor soluta veniam voluptatem quis commodi eveniet earum porro! Molestiae optio sapiente explicabo! Ducimus saepe perspiciatis vitae sequi consequuntur.</div>
+			<div class="doc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat officiis deleniti dolor soluta veniam voluptatem quis commodi eveniet earum porro! Molestiae optio sapiente explicabo! Ducimus saepe perspiciatis vitae sequi consequuntur.</div>
+			<div class="doc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat officiis deleniti dolor soluta veniam voluptatem quis commodi eveniet earum porro! Molestiae optio sapiente explicabo! Ducimus saepe perspiciatis vitae sequi consequuntur.</div>
+			<div class="doc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat officiis deleniti dolor soluta veniam voluptatem quis commodi eveniet earum porro! Molestiae optio sapiente explicabo! Ducimus saepe perspiciatis vitae sequi consequuntur.</div>
+			<div class="doc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat officiis deleniti dolor soluta veniam voluptatem quis commodi eveniet earum porro! Molestiae optio sapiente explicabo! Ducimus saepe perspiciatis vitae sequi consequuntur.</div>
+			<div class="doc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat officiis deleniti dolor soluta veniam voluptatem quis commodi eveniet earum porro! Molestiae optio sapiente explicabo! Ducimus saepe perspiciatis vitae sequi consequuntur.</div>
+			<div class="doc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat officiis deleniti dolor soluta veniam voluptatem quis commodi eveniet earum porro! Molestiae optio sapiente explicabo! Ducimus saepe perspiciatis vitae sequi consequuntur.</div>
+			<div class="doc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat officiis deleniti dolor soluta veniam voluptatem quis commodi eveniet earum porro! Molestiae optio sapiente explicabo! Ducimus saepe perspiciatis vitae sequi consequuntur.</div>
+		</div>
+		<div id="overlay">Meep</div>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="jquery.scrollfocus.js"></script>
+		<script>
+			$(document).on('click', '*', function() {
+				$(window).scrollFocus(this);
+				return false;
+			});
+			$(document).on('selectionchange', function() {
+				var selection = document.getSelection();
+				if (!selection.rangeCount)
+					return;
+
+				$(window).scrollFocus(selection.getRangeAt(0));
+			});
+		</script>
+	</body>
+</html>
