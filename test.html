@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+	<head>
+		<title>jQuery.scrollFocus test page</title>
+		<style>
+			body {
+				background-color:#269;
+				background-image: linear-gradient(white 2px, transparent 2px),
+				linear-gradient(90deg, white 2px, transparent 2px),
+				linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+				background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+				background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
+			}
+			div {
+				outline: 1px solid #000;
+				padding: 100px;
+				margin: 20px;
+				overflow: auto;
+				position: absolute;
+			}
+			#a {
+				height: 800px;
+				width: 500px;
+
+				top: 80px;
+				left: 80px;
+
+				background:
+				linear-gradient(45deg, #92baac 45px, transparent 45px)64px 64px,
+				linear-gradient(45deg, #92baac 45px, transparent 45px,transparent 91px, #e1ebbd 91px, #e1ebbd 135px, transparent 135px),
+				linear-gradient(-45deg, #92baac 23px, transparent 23px, transparent 68px,#92baac 68px,#92baac 113px,transparent 113px,transparent 158px,#92baac 158px);
+				background-color:#e1ebbd;
+				background-size: 128px 128px;
+			}
+			#b {
+				height: 1000px;
+				width: 1000px;
+
+				top: 80px;
+				left: 80px;
+
+				background: 
+				radial-gradient(circle at 100% 50%, transparent 20%, rgba(255,255,255,.3) 21%, rgba(255,255,255,.3) 34%, transparent 35%, transparent),
+				radial-gradient(circle at 0% 50%, transparent 20%, rgba(255,255,255,.3) 21%, rgba(255,255,255,.3) 34%, transparent 35%, transparent) 0 -50px;
+				background-color: slategray;
+				background-size:75px 100px;
+			}
+			#c {
+				height: 2000px;
+				width: 2000px;
+
+				top: 80px;
+				left: 80px;
+
+				background-color:#556;
+				background-image: linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+				linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+				linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+				linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+				linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a), 
+				linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a);
+				background-size:80px 140px;
+				background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+			}
+			.d {
+				position: relative;
+				background: #fff;
+				width: 1500px;
+				height: 300px;
+				float: left;
+			}
+			.d:nth-child(2n) {
+				clear: left;
+				float: right;
+			}
+		</style>
+	</head>
+	
+	<body class="grid-overlay">
+		<div id="a">
+			<div id="b">
+				<div id="c">
+					<div class="d">Meep 1</div>
+					<div class="d">Meep 2</div>
+					<div class="d">Meep 3</div>
+					<div class="d">Meep 4</div>
+					<div class="d">Meep 5</div>
+					<div class="d">Meep 6</div>
+					<div class="d">Meep 7</div>
+					<div class="d">Meep 8</div>
+					<div class="d">Meep 9</div>
+					<div class="d">Meep 10</div>
+				</div>
+			</div>
+		</div>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="jquery.scrollfocus.js"></script>
+		<script>
+			$(document).on('click', '*', function() {
+				$(this).closest('div, body').scrollFocus(this);
+				return false;
+			});
+			$(document).on('keyup', function() {
+				var selection = document.getSelection();
+				if (!selection.rangeCount)
+					return;
+
+				$('#a').scrollFocus(selection.getRangeAt(0));
+			});
+		</script>
+	</body>
+</html>
