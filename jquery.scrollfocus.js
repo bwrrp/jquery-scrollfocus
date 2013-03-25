@@ -31,14 +31,6 @@
 			point);
 	};
 
-	Point.prototype.toString = function() {
-		var repr = '<' + this.left + ',' + this.top + '>';
-		if (this.offsetParent) {
-			repr += ' (absolute ' + this.absolute().toString() + ', origin ' + this.offsetParent.toString() + ')';
-		}
-		return repr;
-	};
-
 	function Box(left, top, width, height, parentBox) {
 		if (!arguments.length)
 			return;
@@ -64,15 +56,6 @@
 		return new Box(newOrigin.left, newOrigin.top, this.width, this.height, box);
 	};
 
-	Box.prototype.toString = function() {
-		var repr = 'BOX (' + this.origin.toString() + ' ' + this.width + 'x' + this.height + ')';
-		if (!this.parentBox) {
-			return repr + ' IN VIEWPORT';
-		}
-
-		return repr + ' IN [' + this.parentBox.toString() + ']';
-	};
-
 	function ScrollBox(element) {
 		Box.call(this, 0, 0, 0, 0, new OffsetBox(element));
 
@@ -90,7 +73,6 @@
 	};
 
 	ScrollBox.prototype.scrollTo = function(left, top) {
-		console.log('scrolling', this.element, 'from', -this.origin.left, -this.origin.top, 'to', left, top);
 		this.element.scrollTop = top;
 		this.element.scrollLeft = left;
 		this.refresh();
@@ -133,7 +115,6 @@
 
 	WindowBox.prototype.scrollTo = function(left, top) {
 		var window = this.document.defaultView;
-		console.log('scrolling', window, 'from', -this.origin.left, -this.origin.top, 'to', left, top);
 		window.scrollTo(left, top);
 		this.refresh();
 	};
@@ -192,7 +173,6 @@
 			}
 			extendedRange.detach();
 		}
-		console.log(bounds);
 		if (container.nodeType !== 1)
 			container = container.parentNode;
 		return new Box(
@@ -282,12 +262,8 @@
 				}
 			}
 
-			console.log('scrolling', targetPoint.toString(), 'into', viewportBox.toString());
-
 			// Get offset
 			var offset = getOffsetFromBox(targetPoint, viewportBox);
-
-			console.log('offset', offset.toString());
 
 			// Scroll element
 			scrollable.scrollTo(
