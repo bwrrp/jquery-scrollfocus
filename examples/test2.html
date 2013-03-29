@@ -65,7 +65,7 @@
 		</div>
 		<div id="overlay">Meep</div>
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-		<script src="jquery.scrollfocus.js"></script>
+		<script src="../jquery.scrollfocus.js"></script>
 		<script>
 			function getViewport() {
 				var overlayHeight = $('#overlay').height();
@@ -82,7 +82,8 @@
 				$(window).scrollFocus({
 					target: event.target,
 					viewport: getViewport(),
-					point: 'left top'
+					point: 'left top',
+					toPoint: 'left top'
 				});
 				return false;
 			});
