@@ -250,9 +250,9 @@
 		return adjustedBox;
 	}
 
-	function getTargetPoint(origin, point) {
+	function getTargetPoint(targetBox, point) {
 		// Determine target point
-		var targetPoint = new Point(0, 0, origin);
+		var targetPoint = new Point(0, 0, targetBox.origin);
 		if (typeof point === 'string') {
 			var pointParts = point.split(/\s+/);
 			while (pointParts.length) {
@@ -318,7 +318,7 @@
 				viewportBox = shrinkViewport(viewportBox, options.toPoint);
 			}
 
-			var targetPoint = getTargetPoint(targetBox.origin, options.point);
+			var targetPoint = getTargetPoint(targetBox, options.point);
 
 			// Get offset
 			var offset = getOffsetFromBox(targetPoint, viewportBox);
