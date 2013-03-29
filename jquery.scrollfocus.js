@@ -206,6 +206,86 @@
 		point: 'left top'
 	};
 
+	function adjustViewport(viewportBox, viewportOptions) {
+		var padding = viewportOptions.padding || 0,
+			width = viewportOptions.width || (viewportBox ? viewportBox.width : scrollable.width),
+			height = viewportOptions.height || (viewportBox ? viewportBox.height : scrollable.height);
+		return new Box(
+			(viewportOptions.left + padding) || 0,
+			(viewportOptions.top  + padding) || 0,
+			width - 2 * padding,
+			height - 2 * padding,
+			viewportBox);
+	}
+
+	function shrinkViewport(viewportBox, toPoint) {
+		// Adjust viewport box to cover only the requested point
+		var adjustedBox = new Box(
+			0, 0,
+			viewportBox.width,
+			viewportBox.height,
+			viewportBox);
+		var toPointParts = toPoint.split(/\s+/);
+		while (toPointParts.length) {
+			var toPointPart = toPointParts.pop();
+			switch (toPointPart.toLowerCase()) {
+				case 'left':
+					adjustedBox.origin.left = 0;
+					adjustedBox.width = 0;
+					break;
+				case 'top':
+					adjustedBox.origin.top = 0;
+					adjustedBox.height = 0;
+					break;
+				case 'right':
+					adjustedBox.origin.left = viewportBox.width;
+					adjustedBox.width = 0;
+					break;
+				case 'bottom':
+					adjustedBox.origin.top = viewportBox.height;
+					adjustedBox.height = 0;
+					break;
+			}
+		}
+		return adjustedBox;
+	}
+
+	function getTargetPoint(origin, point) {
+		// Determine target point
+		var targetPoint = new Point(0, 0, origin);
+		if (typeof point === 'string') {
+			var pointParts = point.split(/\s+/);
+			while (pointParts.length) {
+				var pointPart = pointParts.pop();
+				switch (pointPart.toLowerCase()) {
+					case 'left':
+						targetPoint.left = 0;
+						break;
+					case 'top':
+						targetPoint.top = 0;
+						break;
+					case 'right':
+						targetPoint.left = targetBox.width;
+						break;
+					case 'bottom':
+						targetPoint.top = targetBox.height;
+						break;
+					case 'center':
+						targetPoint.left = targetBox.width / 2;
+						break;
+					case 'middle':
+						targetPoint.top = targetBox.height / 2;
+						break;
+				}
+			}
+		}
+		return targetPoint;
+	}
+
+	function isWindow(obj) {
+		return !!obj.document;
+	}
+
 	$.fn.scrollFocus = function(options) {
 		$(this).each(function() {
 			var target = options.target;
@@ -219,48 +299,26 @@
 				scrollable = isElement(this) ? new ScrollBox(this) : new WindowBox(this.document),
 				viewportBox = scrollable.parentBox;
 
-			// Determine viewport box
-			if (options.viewport) {
-				var padding = options.viewport.padding || 0,
-					width = options.viewport.width || (viewportBox ? viewportBox.width : scrollable.width),
-					height = options.viewport.height || (viewportBox ? viewportBox.height : scrollable.height);
+			// Ensure we have a viewport box
+			if (!viewportBox) {
+				var document = isWindow(this) ? this.document : (this.ownerDocument || this);
 				viewportBox = new Box(
-					(options.viewport.left + padding) || 0,
-					(options.viewport.top  + padding) || 0,
-					width - 2 * padding,
-					height - 2 * padding,
-					viewportBox);
+					0, 0,
+					document.documentElement.clientWidth,
+					document.documentElement.clientHeight,
+					null);
 			}
 
-			// Determine target point
-			var origin = targetBox.origin,
-				targetPoint = new Point(0, 0, origin);
-			if (typeof options.point === 'string') {
-				var parts = options.point.split(/\s+/);
-				while (parts.length) {
-					var part = parts.pop();
-					switch (part.toLowerCase()) {
-						case 'left':
-							targetPoint.left = 0;
-							break;
-						case 'top':
-							targetPoint.top = 0;
-							break;
-						case 'right':
-							targetPoint.left = targetBox.width;
-							break;
-						case 'bottom':
-							targetPoint.top = targetBox.height;
-							break;
-						case 'center':
-							targetPoint.left = targetBox.width / 2;
-							break;
-						case 'middle':
-							targetPoint.top = targetBox.height / 2;
-							break;
-					}
-				}
+			// Adjust viewport box
+			if (options.viewport) {
+				viewportBox = adjustViewport(viewportBox, options.viewport);
 			}
+
+			if (options.toPoint) {
+				viewportBox = shrinkViewport(viewportBox, options.toPoint);
+			}
+
+			var targetPoint = getTargetPoint(targetBox.origin, options.point);
 
 			// Get offset
 			var offset = getOffsetFromBox(targetPoint, viewportBox);
