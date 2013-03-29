@@ -29,9 +29,10 @@ Assuming `selector` matches a scrollable element, scrolls that element to bring 
 			height : ...,
 			padding: ...
 		},
-		point: 'left top'
+		point: 'left top',
+		toPoint: 'left top'
 	});
 
-Allows configuring custom viewports (all values default to the scrollable element, except padding which defaults to `0`) and target points (use any combination of `left` / `center` / `right` and `top` / `middle` / `bottom`.
+Allows configuring custom viewports (all values default to the scrollable element, except padding which defaults to `0`), target points (use `point` for target and `toPoint` for viewport, both are optional) (use any combination of `left` / `center` / `right` and `top` / `middle` / `bottom`.
 
 Target can be either an element or a range (such as the current selection - `document.getSelection().getRangeAt(0)`).
