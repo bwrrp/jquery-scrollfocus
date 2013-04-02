@@ -9,8 +9,10 @@
 	],
 	"version"      : "0.1.1",
 	"author"       : {
-		"name"     : "Stef Busking"
+		"name"     : "Stef Busking",
+		"url"      : "https://github.com/bwrrp"
 	},
+	"homepage"     : "http://bwrrp.github.com/jquery-scrollfocus/",
 	"licenses"     : [
 		{
 			"type" : "MIT",
