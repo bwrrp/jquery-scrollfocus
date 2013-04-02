@@ -7,6 +7,7 @@ Release notes
 -------------
 
 **0.1.0** Initial public release
+**0.1.1** Published to jQuery plugins site
 
 
 How to use
