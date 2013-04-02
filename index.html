@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>jQuery.scrollFocus by Bwrrp</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/Bwrrp/jquery-scrollfocus">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/Bwrrp/jquery-scrollfocus/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/Bwrrp/jquery-scrollfocus/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>jQuery.scrollFocus</h1>
+          <p>jQuery scroll-into-view plugin</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/Bwrrp">Bwrrp</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>jquery.scrollFocus</h1>
+
+<p>Powerful programmable scrolling - scroll elements, DOM ranges or arbitrary points into configurable viewports.</p>
+
+<h2>Release notes</h2>
+
+<p><strong>0.1.0</strong> Initial public release</p>
+
+<h2>How to use</h2>
+
+<p><em>Short form</em>: </p>
+
+<pre><code>$(selector).scrollFocus(target);
+</code></pre>
+
+<p>Assuming <code>selector</code> matches a scrollable element, scrolls that element to bring target's top left corner within the element's bounds (or as close as possible).</p>
+
+<p><em>Long form</em>:</p>
+
+<pre><code>$(selector).scrollFocus({
+    target: target,
+    viewport: {
+        top    : ...,
+        left   : ...,
+        width  : ...,
+        height : ...,
+        padding: ...
+    },
+    point: 'left top',
+    toPoint: 'left top'
+});
+</code></pre>
+
+<p>Allows configuring custom viewports (all values default to the scrollable element, except padding which defaults to <code>0</code>), target points (use <code>point</code> for target and <code>toPoint</code> for viewport, both are optional) (use any combination of <code>left</code> / <code>center</code> / <code>right</code> and <code>top</code> / <code>middle</code> / <code>bottom</code>.</p>
+
+<p>Target can be either an element or a range (such as the current selection - <code>document.getSelection().getRangeAt(0)</code>).</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-11284886-4");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
