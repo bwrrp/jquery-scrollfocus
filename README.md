@@ -6,7 +6,7 @@ Powerful programmable scrolling - scroll elements, DOM ranges or arbitrary point
 Release notes
 -------------
 
-**1.0.0** Initial release
+**0.1.0** Initial public release
 
 
 How to use
