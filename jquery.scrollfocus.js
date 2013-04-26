@@ -164,15 +164,6 @@
 	function getRangeBox(range) {
 		var bounds = getRangeBounds(range),
 			container = range.commonAncestorContainer;
-		if (isInvalidRect(bounds)) {
-			// Probably a collapsed range, use the startContainer instead
-			var extendedRange = range.cloneRange();
-			while (isInvalidRect(bounds)) {
-				extendRight(extendedRange);
-				bounds = extendedRange.getBoundingClientRect();
-			}
-			extendedRange.detach();
-		}
 		if (container.nodeType !== 1)
 			container = container.parentNode;
 		return new Box(
