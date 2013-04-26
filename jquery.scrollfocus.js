@@ -140,7 +140,7 @@
 
 		// Try going left once
 		if (isTextNode(extendedRange.endContainer) && extendedRange.endOffset === extendedRange.endContainer.length && extendedRange.endContainer.length) {
-			extendedRange.setEnd(extendedRange.endContainer, extendedRange.endOffset - 1);
+			extendedRange.setStart(extendedRange.endContainer, extendedRange.endOffset - 1);
 			bounds = extendedRange.getBoundingClientRect();
 		}
 
@@ -150,8 +150,11 @@
 				extendedRange.setEnd(extendedRange.endContainer, extendedRange.endOffset + 1);
 			} else if (isElement(extendedRange.endContainer) && extendedRange.endOffset < extendedRange.endContainer.childNodes.length) {
 				extendedRange.setEnd(extendedRange.endContainer.childNodes[extendedRange.endOffset], 0);
-			} else {
+			} else if (isTextNode(extendedRange.endContainer)) {
 				extendedRange.setEndAfter(extendedRange.endContainer);
+			} else {
+				// Just select the entire parent
+				extendedRange.selectNode(extendedRange.endContainer);
 			}
 			bounds = extendedRange.getBoundingClientRect();
 		}
@@ -164,15 +167,6 @@
 	function getRangeBox(range) {
 		var bounds = getRangeBounds(range),
 			container = range.commonAncestorContainer;
-		if (isInvalidRect(bounds)) {
-			// Probably a collapsed range, use the startContainer instead
-			var extendedRange = range.cloneRange();
-			while (isInvalidRect(bounds)) {
-				extendRight(extendedRange);
-				bounds = extendedRange.getBoundingClientRect();
-			}
-			extendedRange.detach();
-		}
 		if (container.nodeType !== 1)
 			container = container.parentNode;
 		return new Box(
