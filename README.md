@@ -6,8 +6,9 @@ Powerful programmable scrolling - scroll elements, DOM ranges or arbitrary point
 Release notes
 -------------
 
-**0.1.0** Initial public release
-**0.1.1** Published to jQuery plugins site
+**0.1.0** Initial public release.  
+**0.1.1** Published to jQuery plugins site.  
+**0.1.2** Improved handling of collapsed range targets on empty lines.
 
 
 How to use
