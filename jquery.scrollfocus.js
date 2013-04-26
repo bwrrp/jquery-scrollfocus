@@ -150,8 +150,11 @@
 				extendedRange.setEnd(extendedRange.endContainer, extendedRange.endOffset + 1);
 			} else if (isElement(extendedRange.endContainer) && extendedRange.endOffset < extendedRange.endContainer.childNodes.length) {
 				extendedRange.setEnd(extendedRange.endContainer.childNodes[extendedRange.endOffset], 0);
-			} else {
+			} else if (isTextNode(extendedRange.endContainer)) {
 				extendedRange.setEndAfter(extendedRange.endContainer);
+			} else {
+				// Just select the entire parent
+				extendedRange.selectNode(extendedRange.endContainer);
 			}
 			bounds = extendedRange.getBoundingClientRect();
 		}
