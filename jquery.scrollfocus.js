@@ -140,7 +140,7 @@
 
 		// Try going left once
 		if (isTextNode(extendedRange.endContainer) && extendedRange.endOffset === extendedRange.endContainer.length && extendedRange.endContainer.length) {
-			extendedRange.setEnd(extendedRange.endContainer, extendedRange.endOffset - 1);
+			extendedRange.setStart(extendedRange.endContainer, extendedRange.endOffset - 1);
 			bounds = extendedRange.getBoundingClientRect();
 		}
 
