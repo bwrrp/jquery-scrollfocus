@@ -149,7 +149,13 @@
 			if (isTextNode(extendedRange.endContainer) && extendedRange.endOffset < extendedRange.endContainer.length) {
 				extendedRange.setEnd(extendedRange.endContainer, extendedRange.endOffset + 1);
 			} else if (isElement(extendedRange.endContainer) && extendedRange.endOffset < extendedRange.endContainer.childNodes.length) {
-				extendedRange.setEnd(extendedRange.endContainer.childNodes[extendedRange.endOffset], 0);
+				var nextChild = extendedRange.endContainer.childNodes[extendedRange.endOffset];
+				// Only enter text nodes or child elements
+				if (isTextNode(nextChild) || isElement(nextChild)) {
+					extendedRange.setEnd(nextChild, 0);
+				} else {
+					extendedRange.setEnd(extendedRange.endContainer, extendedRange.endOffset + 1);
+				}
 			} else if (isTextNode(extendedRange.endContainer)) {
 				extendedRange.setEndAfter(extendedRange.endContainer);
 			} else {
