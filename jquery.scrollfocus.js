@@ -330,4 +330,7 @@
 		});
 	};
 
+	// Expose getRangeBounds
+	$.fn.scrollFocus.getRangeBounds = getRangeBounds;
+
 })(jQuery);
