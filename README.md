@@ -8,7 +8,8 @@ Release notes
 
 **0.1.0** Initial public release.  
 **0.1.1** Published to jQuery plugins site.  
-**0.1.2** Improved handling of collapsed range targets on empty lines.
+**0.1.2** Improved handling of collapsed range targets on empty lines.  
+**0.1.3** Don't attempt to extend range into comments or processing instructions. Expose getRangeBounds.
 
 
 How to use
