@@ -3,50 +3,43 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>jQuery.scrollFocus by Bwrrp</title>
+    <title>jQuery.scrollFocus by bwrrp</title>
+
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/Bwrrp/jquery-scrollfocus">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/Bwrrp/jquery-scrollfocus/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/Bwrrp/jquery-scrollfocus/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
-
     <div class="wrapper">
+      <header>
+        <h1>jQuery.scrollFocus</h1>
+        <p>jQuery scroll-into-view plugin</p>
 
+        <p class="view"><a href="https://github.com/bwrrp/jquery-scrollfocus">View the Project on GitHub <small>bwrrp/jquery-scrollfocus</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/bwrrp/jquery-scrollfocus/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/bwrrp/jquery-scrollfocus/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/bwrrp/jquery-scrollfocus">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
       <section>
-        <div id="title">
-          <h1>jQuery.scrollFocus</h1>
-          <p>jQuery scroll-into-view plugin</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/Bwrrp">Bwrrp</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
-        </div>
-
-        <h1>jquery.scrollFocus</h1>
+        <h1>
+<a name="jqueryscrollfocus" class="anchor" href="#jqueryscrollfocus"><span class="octicon octicon-link"></span></a>jquery.scrollFocus</h1>
 
 <p>Powerful programmable scrolling - scroll elements, DOM ranges or arbitrary points into configurable viewports.</p>
 
-<h2>Release notes</h2>
+<h2>
+<a name="release-notes" class="anchor" href="#release-notes"><span class="octicon octicon-link"></span></a>Release notes</h2>
 
-<p><strong>0.1.0</strong> Initial public release</p>
+<p><strong>0.1.0</strong> Initial public release.<br><strong>0.1.1</strong> Published to jQuery plugins site.<br><strong>0.1.2</strong> Improved handling of collapsed range targets on empty lines.<br><strong>0.1.3</strong> Don't attempt to extend range into comments or processing instructions. Expose getRangeBounds.<br><strong>0.2.0</strong> Rewrote internals based on jQuery.fn.offset for more accurate positions in some cases.</p>
 
-<h2>How to use</h2>
+<h2>
+<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use</h2>
 
 <p><em>Short form</em>: </p>
 
@@ -62,8 +55,8 @@
     viewport: {
         top    : ...,
         left   : ...,
-        width  : ...,
-        height : ...,
+        width  : ..., (or right)
+        height : ..., (or bottom)
         padding: ...
     },
     point: 'left top',
@@ -73,11 +66,14 @@
 
 <p>Allows configuring custom viewports (all values default to the scrollable element, except padding which defaults to <code>0</code>), target points (use <code>point</code> for target and <code>toPoint</code> for viewport, both are optional) (use any combination of <code>left</code> / <code>center</code> / <code>right</code> and <code>top</code> / <code>middle</code> / <code>bottom</code>.</p>
 
-<p>Target can be either an element or a range (such as the current selection - <code>document.getSelection().getRangeAt(0)</code>).</p>
+<p>Target can be either an element or a range (such as the current selection - <code>document.getSelection().getRangeAt(0)</code>). If a jQuery selection is passed, only the first element is used.</p>
       </section>
-
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/bwrrp">bwrrp</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script src="javascripts/scale.fix.js"></script>
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
