@@ -211,7 +211,6 @@
 
 			// Determine amount to scroll
 			var scrollOffset = computeScrollOffset(targetBox, viewportBox, options);
-			console.log('scrolling', targetBox, 'into', viewportBox, 'by', scrollOffset);
 			scrollable.scrollLeft(scrollable.scrollLeft() + scrollOffset.left);
 			scrollable.scrollTop(scrollable.scrollTop() + scrollOffset.top);
 		});
