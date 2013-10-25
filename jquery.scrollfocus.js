@@ -84,6 +84,9 @@
 	}
 
 	function insetBox(box, padding) {
+		if (!padding)
+			return;
+
 		box.top += padding;
 		box.left += padding;
 		box.bottom -= padding;
@@ -92,11 +95,52 @@
 		box.height -= 2 * padding;
 	}
 
-	function computeScrollOffset(targetBox, viewportBox, options) {
-		// TODO: determine amount to scroll based on options
+	function reduceBox(box, pointSpec) {
+		if (!pointSpec)
+			return;
+
+		var pointParts = pointSpec.split(/\s+/);
+		for (var i = pointParts.length - 1; i >= 0; --i) {
+			switch (pointParts[i].toLowerCase()) {
+				case 'left':
+					box.right = box.left;
+					box.width = 0;
+					break;
+
+				case 'right':
+					box.left = box.right;
+					box.width = 0;
+					break;
+
+				case 'top':
+					box.bottom = box.top;
+					box.height = 0;
+					break;
+
+				case 'bottom':
+					box.top = box.bottom;
+					box.height = 0;
+					break;
+			}
+		}
+	}
+
+	function computeScrollOffset(targetBox, viewportBox) {
+		// Determine minimal offset from viewport to target
+		var deltaX = targetBox.left < viewportBox.left ?
+				targetBox.right - viewportBox.left :
+				targetBox.left - viewportBox.right,
+			deltaY = targetBox.top < viewportBox.top ?
+				targetBox.bottom - viewportBox.top :
+				targetBox.top - viewportBox.bottom;
+
 		return {
-			left: targetBox.left - viewportBox.left,
-			top: targetBox.top - viewportBox.top
+			left: targetBox.left < viewportBox.left ?
+				Math.min(deltaX, 0) :
+				Math.max(deltaX, 0),
+			top: targetBox.top < viewportBox.top ?
+				Math.min(deltaY, 0) :
+				Math.max(deltaY, 0)
 		};
 	}
 
@@ -160,10 +204,10 @@
 			}
 			completeBox(viewportBox, scrollable);
 
-			// Apply padding
-			if (options.padding) {
-				insetBox(viewportBox, options.padding);
-			}
+			// Apply options
+			insetBox(viewportBox, options.padding);
+			reduceBox(targetBox, options.point);
+			reduceBox(viewportBox, options.toPoint);
 
 			// Determine amount to scroll
 			var scrollOffset = computeScrollOffset(targetBox, viewportBox, options);
