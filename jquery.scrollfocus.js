@@ -183,8 +183,16 @@
 			completeBox(targetBox, target);
 
 			// Determine viewport box (scrollable dimensions)
-			var viewportBox = options.viewport;
-			if (viewportBox) {
+			var viewportBox;
+			if (options.viewport) {
+				viewportBox = {
+					left:   options.viewport.left,
+					right:  options.viewport.right,
+					top:    options.viewport.top,
+					bottom: options.viewport.bottom,
+					width:  options.viewport.width,
+					height: options.viewport.height
+				};
 				completeBox(viewportBox, $(window));
 				// Make viewport relative to document
 				viewportBox.left += pageXOffset;
@@ -205,13 +213,12 @@
 			completeBox(viewportBox, scrollable);
 
 			// Apply options
-			insetBox(viewportBox, options.padding);
+			insetBox(viewportBox, options.viewport && options.viewport.padding);
 			reduceBox(targetBox, options.point);
 			reduceBox(viewportBox, options.toPoint);
 
 			// Determine amount to scroll
 			var scrollOffset = computeScrollOffset(targetBox, viewportBox, options);
-			console.log('scrolling', targetBox, 'into', viewportBox, 'by', scrollOffset);
 			scrollable.scrollLeft(scrollable.scrollLeft() + scrollOffset.left);
 			scrollable.scrollTop(scrollable.scrollTop() + scrollOffset.top);
 		});
