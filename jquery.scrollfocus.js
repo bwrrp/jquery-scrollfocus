@@ -205,7 +205,7 @@
 			completeBox(viewportBox, scrollable);
 
 			// Apply options
-			insetBox(viewportBox, options.padding);
+			insetBox(viewportBox, options.viewport && options.viewport.padding);
 			reduceBox(targetBox, options.point);
 			reduceBox(viewportBox, options.toPoint);
 
