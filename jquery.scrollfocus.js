@@ -183,8 +183,16 @@
 			completeBox(targetBox, target);
 
 			// Determine viewport box (scrollable dimensions)
-			var viewportBox = options.viewport;
-			if (viewportBox) {
+			var viewportBox;
+			if (options.viewport) {
+				viewportBox = {
+					left:   options.viewport.left,
+					right:  options.viewport.right,
+					top:    options.viewport.top,
+					bottom: options.viewport.bottom,
+					width:  options.viewport.width,
+					height: options.viewport.height
+				};
 				completeBox(viewportBox, $(window));
 				// Make viewport relative to document
 				viewportBox.left += pageXOffset;
